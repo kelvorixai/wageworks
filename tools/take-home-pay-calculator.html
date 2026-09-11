@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6051499531677717" crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UAE Take-Home Pay Calculator | WageWorks</title>
+<meta name="description" content="Free UAE take-home pay calculator. Enter your gross salary, basic salary, and deductions for an instant breakdown of what actually lands in your account.">
+<link rel="canonical" href="https://kelvorixai.github.io/wageworks/tools/take-home-pay-calculator.html">
+<meta property="og:title" content="UAE Take-Home Pay Calculator">
+<meta property="og:description" content="Enter your gross salary, basic salary, and deductions to see your real take-home pay and basic-to-gross ratio.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<style>
+  .calc{ border:1px solid var(--line); padding:28px 26px; margin-top:28px; background:var(--paper-raised); }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:20px; }
+  .field label{ font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); font-weight:500; }
+  .field input{
+    font: inherit; font-size:16px; padding:11px 12px; border:1px solid var(--line);
+    background:var(--paper); color:var(--ink); border-radius:2px; width:100%;
+  }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:480px){ .field-row{ grid-template-columns:1fr; } }
+  button.calc-btn{
+    font: inherit; font-size:15px; font-weight:600; background:var(--navy-soft); color:var(--paper);
+    border:none; padding:13px 22px; border-radius:2px; cursor:pointer; width:100%;
+  }
+  button.calc-btn:hover{ background:var(--navy); }
+  .result{ margin-top:26px; padding:22px 24px; border:1px solid var(--ochre); border-left:4px solid var(--ochre); background:var(--paper); display:none; }
+  .result.show{ display:block; }
+  .result .amount{ font-family:"Fraunces", serif; font-size:2.4rem; font-weight:700; color:var(--ochre-strong); font-variant-numeric:tabular-nums; }
+  .result .amount span{ font-size:1.1rem; font-family:"IBM Plex Sans", sans-serif; font-weight:500; color:var(--ink-soft); }
+  .result .breakdown{ margin-top:14px; font-size:13.5px; color:var(--ink-soft); font-family:"IBM Plex Mono", monospace; line-height:1.8; }
+  .share-btn{
+    margin-top:16px; font: inherit; font-size:13px; background:none; color:var(--navy-soft);
+    border:1px solid var(--navy-soft); padding:8px 14px; border-radius:2px; cursor:pointer;
+  }
+  .share-btn:hover{ background:var(--navy-soft); color:var(--paper); }
+  .formula-note{ font-size:13px; color:var(--ink-soft); margin-top:10px; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="../index.html">WageWorks</a>
+    <nav class="site">
+      <a href="../index.html">Guides</a>
+      <a href="index.html">Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="post">
+    <header class="meta">
+      <span class="tag">Tool</span>
+      <h1>UAE take-home pay calculator</h1>
+      <p class="dek">Enter your gross salary, basic salary, and any monthly deductions to get an instant breakdown of what actually lands in your account — plus your basic-to-gross ratio, the figure that quietly determines your gratuity accrual.</p>
+    </header>
+
+    <div class="calc">
+      <div class="field-row">
+        <div class="field">
+          <label for="gross">Gross monthly salary</label>
+          <input type="number" id="gross" inputmode="decimal" placeholder="e.g. 15000" min="0" step="any">
+        </div>
+        <div class="field">
+          <label for="basic">Basic monthly salary</label>
+          <input type="number" id="basic" inputmode="decimal" placeholder="e.g. 9000" min="0" step="any">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="deductions">Monthly deductions (loans, pension, advances)</label>
+          <input type="number" id="deductions" inputmode="decimal" placeholder="e.g. 0" min="0" step="any">
+        </div>
+      </div>
+
+      <button class="calc-btn" id="calcBtn" type="button">Calculate my take-home pay</button>
+
+      <div class="result" id="result">
+        <div class="amount"><span>Take-home pay: </span><span id="amountValue">0</span><span> /month</span></div>
+        <div class="breakdown" id="breakdown"></div>
+        <button class="share-btn" id="shareBtn" type="button">Copy result to share</button>
+      </div>
+    </div>
+
+    <div class="content" style="margin-top:36px;">
+      <h2>How this is calculated</h2>
+      <p>This follows the component breakdown from our <a href="../articles/uae-salary-structure-basic-vs-gross.html">basic vs. gross salary guide</a>:</p>
+      <ul>
+        <li><strong>Housing + transport + other allowances:</strong> gross salary minus basic salary</li>
+        <li><strong>Basic-to-gross ratio:</strong> basic salary ÷ gross salary — the figure that determines your gratuity accrual, since UAE end-of-service gratuity is calculated from basic salary, not gross</li>
+        <li><strong>Take-home pay:</strong> gross salary minus any monthly deductions (loan repayments, pension contributions for UAE/GCC nationals, salary advances)</li>
+      </ul>
+      <p class="formula-note">This is a planning estimate, not a payslip — actual deductions depend on your specific employment contract, nationality, and any active loans or advances. Confirm your exact structure with your employer's HR department.</p>
+    </div>
+  </article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>WageWorks</span>
+    <span>Also from Kelvorix AI: <a href="https://kelvorixai.github.io/">see all our sites</a></span>
+    <span>Educational content only — not financial, tax, or HR advice.</span>
+    <span><a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var calcBtn = document.getElementById('calcBtn');
+  var shareBtn = document.getElementById('shareBtn');
+  var resultEl = document.getElementById('result');
+  var amountEl = document.getElementById('amountValue');
+  var breakdownEl = document.getElementById('breakdown');
+  var lastSummary = '';
+
+  function fmt(n){
+    return n.toLocaleString('en-US', {maximumFractionDigits: 0});
+  }
+
+  calcBtn.addEventListener('click', function(){
+    var gross = parseFloat(document.getElementById('gross').value) || 0;
+    var basic = parseFloat(document.getElementById('basic').value) || 0;
+    var deductions = parseFloat(document.getElementById('deductions').value) || 0;
+
+    if (gross <= 0) {
+      breakdownEl.textContent = '';
+      amountEl.textContent = 'Enter your numbers above';
+      resultEl.classList.add('show');
+      shareBtn.style.display = 'none';
+      return;
+    }
+
+    var allowances = gross - basic;
+    var takeHome = gross - deductions;
+    var basicRatio = basic > 0 ? (basic / gross) * 100 : 0;
+    var annualTakeHome = takeHome * 12;
+
+    var lines = [];
+    lines.push('Gross salary: ' + fmt(gross));
+    lines.push('Basic salary: ' + fmt(basic) + ' (' + basicRatio.toFixed(1) + '% of gross)');
+    lines.push('Housing + transport + other allowances: ' + fmt(allowances));
+    lines.push('Deductions: ' + fmt(deductions));
+    lines.push('Annual take-home: ' + fmt(annualTakeHome));
+
+    amountEl.textContent = fmt(Math.round(takeHome));
+    breakdownEl.innerHTML = lines.join('<br>');
+    resultEl.classList.add('show');
+    shareBtn.style.display = 'inline-block';
+    lastSummary = 'My UAE take-home pay works out to about AED ' + fmt(Math.round(takeHome)) + '/month, with a basic-to-gross ratio of ' + basicRatio.toFixed(1) + '%. Try it yourself: https://kelvorixai.github.io/wageworks/tools/take-home-pay-calculator.html';
+  });
+
+  shareBtn.addEventListener('click', function(){
+    if (!lastSummary) return;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(lastSummary).then(function(){
+        shareBtn.textContent = 'Copied!';
+        setTimeout(function(){ shareBtn.textContent = 'Copy result to share'; }, 1800);
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
+
