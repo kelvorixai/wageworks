@@ -40,7 +40,70 @@
   }
   .share-btn:hover{ background:var(--navy-soft); color:var(--paper); }
   .formula-note{ font-size:13px; color:var(--ink-soft); margin-top:10px; }
+  .faq{ margin-top:36px; }
+  .faq details{ border:1px solid var(--line); border-radius:2px; padding:14px 16px; margin-bottom:10px; background:var(--paper-raised); }
+  .faq summary{ cursor:pointer; font-weight:600; list-style:none; }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary::after{ content:"+"; float:right; color:var(--ink-soft); }
+  .faq details[open] summary::after{ content:"\2013"; }
+  .faq p{ margin-top:10px; font-size:14.5px; color:var(--ink-soft); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does my basic salary matter if my take-home pay is the same?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because UAE end-of-service gratuity is calculated from basic salary, not gross salary — a lower basic-to-gross ratio quietly reduces your eventual gratuity payout even though your monthly take-home pay is unaffected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is UAE take-home pay calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gross monthly salary minus any monthly deductions such as loan repayments, pension contributions for UAE/GCC nationals, or salary advances."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What counts as an allowance in a UAE salary structure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Anything in your gross salary beyond your basic salary — commonly housing, transport, and other allowances."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good basic-to-gross ratio in the UAE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There's no legal minimum, but a higher basic-to-gross ratio means a larger gratuity and overtime base, since both are calculated on basic salary. A lower ratio (more of your pay as allowances) doesn't change your monthly take-home, but it does reduce your gratuity accrual over time."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "UAE Take-Home Pay Calculator",
+  "url": "https://kelvorixai.github.io/wageworks/tools/take-home-pay-calculator.html",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "AED"
+  },
+  "description": "Free calculator that estimates UAE take-home pay from gross salary, basic salary, and deductions, including the basic-to-gross ratio that determines gratuity accrual."
+}
+</script>
 </head>
 <body>
 
@@ -99,6 +162,26 @@
         <li><strong>Take-home pay:</strong> gross salary minus any monthly deductions (loan repayments, pension contributions for UAE/GCC nationals, salary advances)</li>
       </ul>
       <p class="formula-note">This is a planning estimate, not a payslip — actual deductions depend on your specific employment contract, nationality, and any active loans or advances. Confirm your exact structure with your employer's HR department.</p>
+    </div>
+
+    <div class="content faq" style="margin-top:36px;">
+      <h2>Frequently asked questions</h2>
+      <details>
+        <summary>Why does my basic salary matter if my take-home pay is the same?</summary>
+        <p>Because UAE end-of-service gratuity is calculated from basic salary, not gross salary — a lower basic-to-gross ratio quietly reduces your eventual gratuity payout even though your monthly take-home pay is unaffected.</p>
+      </details>
+      <details>
+        <summary>How is UAE take-home pay calculated?</summary>
+        <p>Gross monthly salary minus any monthly deductions such as loan repayments, pension contributions for UAE/GCC nationals, or salary advances.</p>
+      </details>
+      <details>
+        <summary>What counts as an allowance in a UAE salary structure?</summary>
+        <p>Anything in your gross salary beyond your basic salary — commonly housing, transport, and other allowances.</p>
+      </details>
+      <details>
+        <summary>What is a good basic-to-gross ratio in the UAE?</summary>
+        <p>There's no legal minimum, but a higher basic-to-gross ratio means a larger gratuity and overtime base, since both are calculated on basic salary. A lower ratio (more of your pay as allowances) doesn't change your monthly take-home, but it does reduce your gratuity accrual over time.</p>
+      </details>
     </div>
   </article>
 </main>
@@ -171,4 +254,3 @@
 
 </body>
 </html>
-
